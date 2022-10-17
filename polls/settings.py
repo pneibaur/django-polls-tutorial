@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-# this is 
+from decouple import config
 from pathlib import Path
 # we don't normally have to change this line of code. 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # this by creating a new secret key. you can google a django secret key generator. 
 # DONT PUSH THIS UP TO GITHUB! IT'S A SECRET KEY!
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-lmhs6@x9o^&#_brp%7ts@7&z!5$)8a@+$x(j!z48pn8ap%r5#z'
+# # REMOVED # #
+SECRET_KEY = config("SECRET_KEY")
 
 # turn this off in production. for now we leave it as true. We will learn later on this. 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -63,7 +64,7 @@ ROOT_URLCONF = 'polls.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'], # DIRS is a list of filesystem directories to check when loading django templates. it's a search path. 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,0 +1,19 @@
+{% load static %}
+<link rel="stylesheet" type='text/css' href="{% static 'pollapp/style.css' %}">
+
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+            {% comment %} 
+            <li><a href="/polls/{{question.id}}/">{{question.question_text}}</a></li> 
+            the above code has a hardcoded link. You can rewrite it to be like below instead! 
+            {% endcomment %}
+            <li><a href='{% url 'pollapp:detail' question.id %}'> {{question.question_text}}</a></li>
+            {% comment "" %}
+            the url tag will look up the urls file in this pollapp parent file... because we gave it a name='detail' already. this means if you need to change the url path for some reason, you simply need to change it in the urls file to something else. instead of changing multiple files. 
+            {% endcomment %}
+        {% endfor %}    
+    </ul>
+{% else %}
+    <h1>No polls are available.</h1>
+{% endif %}
